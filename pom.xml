@@ -13,7 +13,7 @@
 		<build.number>0</build.number>
 		<wagonVersion>2.12</wagonVersion>
 		<!-- mvnrepo.com is not reachable? -->
-		<skipTests>true</skipTests>
+		<skipTests>false</skipTests>
 		<!-- For distributionManagement section -->
 		<acumos.nexus.url>https://nexus.acumos.org</acumos.nexus.url>
 	</properties>
