@@ -1,7 +1,7 @@
 .. ===============LICENSE_START=======================================================
 .. Acumos CC-BY-4.0
 .. ===================================================================================
-.. Copyright (C) 2017 AT&T Intellectual Property & Tech Mahindra. All rights reserved.
+.. Copyright (C) 2017-2018 AT&T Intellectual Property & Tech Mahindra. All rights reserved.
 .. ===================================================================================
 .. This Acumos documentation file is distributed by AT&T and Tech Mahindra
 .. under the Creative Commons Attribution 4.0 International License (the "License");
@@ -16,14 +16,25 @@
 .. limitations under the License.
 .. ===============LICENSE_END=========================================================
 
-Acumos Nexus Client
-===================
+===================================
+Acumos Nexus Client Developer Guide
+===================================
 
-.. toctree::
-   :maxdepth: 2
-   :caption: Contents:
+The Acumos Nexus Client is a Java library that facilitates download and upload of artifacts
+from/to a Nexus repository.
 
-   release-notes.rst
-   developer-guide.rst
+Usage Example
+-------------
 
-* :ref:`search`
+The following code excerpt shows a test case of the get-artifact feature::
+
+    import org.acumos.nexus.client.NexusArtifactClient;
+    import org.acumos.nexus.client.RepositoryLocation;
+
+    ..
+
+    public void testGetArtifact() throws Exception {
+        NexusArtifactClient artifactClient = new NexusArtifactClient(
+                new RepositoryLocation("0", REPO_URL, REPO_USER, REPO_PASS, null));
+        ByteArrayOutputStream outputStream = artifactClient.getArtifact(artifactPath);
+    }
