@@ -106,9 +106,18 @@ public class NexusArtifactClientTest {
 	public void testGetArtifact() throws Exception {
 		NexusArtifactClient artifactClient = new NexusArtifactClient(
 				new RepositoryLocation("0", REPO_URL, REPO_USER, REPO_PASS, null));
+		
+		// Get in memory
 		ByteArrayOutputStream outputStream = artifactClient.getArtifact(artifactPath);
 		Assert.assertNotNull(outputStream);
-		logger.info("Path " + artifactPath + " yields byte count " + outputStream.size());
+		final int length = outputStream.size();
+		logger.info("Path " + artifactPath + " yielded memory byte count " + length);
+		
+		// Get to stream
+		outputStream = new ByteArrayOutputStream();
+		artifactClient.getArtifact(artifactPath, outputStream);
+		Assert.assertEquals(length, outputStream.size());
+		logger.info("Path " + artifactPath + " yielded stream byte count " + outputStream.size());
 	}
 
 	@Ignore // must not commit valid username/password to allow upload

@@ -22,6 +22,7 @@ package org.acumos.nexus.client;
 
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -161,6 +162,38 @@ public class NexusArtifactClient {
 				streamWagon.disconnect();
 		}
 		return outputStream;
+	}
+
+	/**
+	 * Gets the artifact at the specified path and transfers to the specified output
+	 * stream.
+	 * 
+	 * @param artifactReference
+	 *            artifactPath
+	 * @param outputStream
+	 *            Output stream. Stream is closed when the transfer finishes.
+	 * @throws AuthenticationException
+	 *             On failure to authenticate
+	 * @throws AuthorizationException
+	 *             On failure to authorize
+	 * @throws ConnectionException
+	 *             On failure to connect
+	 * @throws ResourceDoesNotExistException
+	 *             On failure to find resource
+	 * @throws TransferFailedException
+	 *             On failure to transfer
+	 */
+	public void getArtifact(String artifactReference, OutputStream outputStream) throws AuthenticationException,
+			ConnectionException, ResourceDoesNotExistException, TransferFailedException, AuthorizationException {
+		StreamingWagon streamWagon = null;
+		try {
+			streamWagon = MvnRepoWagonConnectionManager.createWagon(repositoryLocation);
+			streamWagon.getToStream(artifactReference, outputStream);
+		} finally {
+			IOUtil.close(outputStream);
+			if (streamWagon != null)
+				streamWagon.disconnect();
+		}
 	}
 
 	/**
