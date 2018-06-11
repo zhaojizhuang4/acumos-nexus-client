@@ -20,6 +20,11 @@
 Nexus Client Release Notes
 ==========================
 
+Version 2.2.0, 11 Jun 2018
+--------------------------
+
+* Upgrade to Apache Maven Wagon v3.1.0 (ACUMOS-665)
+
 Version 2.1.0, 19 Apr 2018
 --------------------------
 
