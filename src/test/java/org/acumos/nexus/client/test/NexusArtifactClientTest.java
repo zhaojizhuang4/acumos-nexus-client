@@ -41,10 +41,10 @@ import org.springframework.web.client.HttpClientErrorException;
  */
 public class NexusArtifactClientTest {
 
-	private static Logger logger = LoggerFactory.getLogger(NexusArtifactClientTest.class);
+	private static final Logger logger = LoggerFactory.getLogger(NexusArtifactClientTest.class);
 
 	private final String REPO_URL = "http://central.maven.org/maven2";
-	final String artifactPath = "ch/qos/logback/logback-classic/1.1.11/logback-classic-1.1.11.jar";
+	private final String artifactPath = "ch/qos/logback/logback-classic/1.1.11/logback-classic-1.1.11.jar";
 	private final String REPO_USER = "test";
 	private final String REPO_PASS = "test";
 	private final String groupId = "g";
@@ -106,13 +106,13 @@ public class NexusArtifactClientTest {
 	public void testGetArtifact() throws Exception {
 		NexusArtifactClient artifactClient = new NexusArtifactClient(
 				new RepositoryLocation("0", REPO_URL, REPO_USER, REPO_PASS, null));
-		
+
 		// Get in memory
 		ByteArrayOutputStream outputStream = artifactClient.getArtifact(artifactPath);
 		Assert.assertNotNull(outputStream);
 		final int length = outputStream.size();
 		logger.info("Path " + artifactPath + " yielded memory byte count " + length);
-		
+
 		// Get to stream
 		outputStream = new ByteArrayOutputStream();
 		artifactClient.getArtifact(artifactPath, outputStream);
@@ -120,7 +120,7 @@ public class NexusArtifactClientTest {
 		logger.info("Path " + artifactPath + " yielded stream byte count " + outputStream.size());
 	}
 
-	@Ignore // must not commit valid username/password to allow upload
+	@Ignore // must not commit valid username/password that would allow an upload!
 	@Test
 	public void testUploadArtifact() throws Exception {
 		NexusArtifactClient artifactClient = new NexusArtifactClient(
