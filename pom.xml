@@ -14,7 +14,7 @@
 		<wagonVersion>3.1.0</wagonVersion>
 		<skipTests>false</skipTests>
 		<!-- For distributionManagement section -->
-		<acumos.nexus.url>https://nexus.acumos.org</acumos.nexus.url>
+		<acumos.nexus.url>http://192.168.19.21:8081</acumos.nexus.url>
 	</properties>
 	<!-- All dependencies are public, no extra repositories needed. -->
 	<dependencies>
@@ -195,11 +195,11 @@
 	<distributionManagement>
 		<repository>
 			<id>releases</id>
-			<url>${acumos.nexus.url}/content/repositories/releases</url>
+			<url>${acumos.nexus.url}/repository/maven-releases</url>
 		</repository>
 		<snapshotRepository>
 			<id>snapshots</id>
-			<url>${acumos.nexus.url}/content/repositories/snapshots</url>
+			<url>${acumos.nexus.url}/repository/maven-snapshots</url>
 		</snapshotRepository>
 		<site>
 			<id>acumos-site</id>
